@@ -3,19 +3,19 @@ import 'package:provider/provider.dart';
 
 import '../providers/auth.dart';
 import '../providers/cart.dart';
-import '../providers/product.dart';
-import '../screens/product_detail_screen.dart';
+import '../providers/checklist.dart';
+import '../screens/checklist_detail_screen.dart';
 
-class ProductItem extends StatelessWidget {
+class ChecklistItem extends StatelessWidget {
   // final String id;
   // final String title;
   // final String imageUrl;
 
-  // ProductItem(this.id, this.title, this.imageUrl);
+  // ChecklistItem(this.id, this.title, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context, listen: false);
+    final checklist = Provider.of<Checklist>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
     final authData = Provider.of<Auth>(context, listen: false);
     return ClipRRect(
@@ -24,40 +24,41 @@ class ProductItem extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(
-              ProductDetailScreen.routeName,
-              arguments: product.id,
+              ChecklistDetailScreen.routeName,
+              arguments: checklist.id,
             );
           },
           child: Image.network(
-            product.imageUrl,
+            checklist.imageUrl,
             fit: BoxFit.cover,
           ),
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: Consumer<Product>(
-            builder: (ctx, product, _) => IconButton(
+          leading: Consumer<Checklist>(
+            builder: (ctx, checklist, _) => IconButton(
               onPressed: () {
-                product.toggleFavoriteStatus(
+                checklist.toggleFavoriteStatus(
                   authData.token,
                   authData.userId,
                 );
               },
-              icon: Icon(
-                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              icon: Icon(checklist.isFavorite
+                  ? Icons.favorite
+                  : Icons.favorite_border),
               color: Theme.of(context).accentColor,
             ),
           ),
           title: Text(
-            product.title,
+            checklist.title,
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
             onPressed: () {
               cart.addItem(
-                product.id,
-                product.price,
-                product.title,
+                checklist.id,
+                checklist.price,
+                checklist.title,
               );
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
@@ -69,7 +70,7 @@ class ProductItem extends StatelessWidget {
                   action: SnackBarAction(
                       label: 'UNDO',
                       onPressed: () {
-                        cart.removeSingleItem(product.id);
+                        cart.removeSingleItem(checklist.id);
                       }),
                 ),
               );

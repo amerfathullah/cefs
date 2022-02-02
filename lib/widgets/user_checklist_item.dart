@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/products.dart';
-import '../screens/edit_product_screen.dart';
+import '../providers/checklists.dart';
+import '../screens/edit_checklist_screen.dart';
 
-class UserProductItem extends StatelessWidget {
+class UserChecklistItem extends StatelessWidget {
   final String id;
   final String title;
   final String imageUrl;
 
-  UserProductItem(this.id, this.title, this.imageUrl);
+  UserChecklistItem(this.id, this.title, this.imageUrl);
   @override
   Widget build(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
@@ -25,7 +25,7 @@ class UserProductItem extends StatelessWidget {
             IconButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamed(EditProductScreen.routeName, arguments: id);
+                    .pushNamed(EditChecklistScreen.routeName, arguments: id);
               },
               icon: Icon(Icons.edit),
               color: Theme.of(context).primaryColor,
@@ -33,8 +33,8 @@ class UserProductItem extends StatelessWidget {
             IconButton(
               onPressed: () async {
                 try {
-                  await Provider.of<Products>(context, listen: false)
-                      .deleteProduct(id);
+                  await Provider.of<Checklists>(context, listen: false)
+                      .deleteChecklist(id);
                 } catch (e) {
                   scaffold.showSnackBar(
                     SnackBar(

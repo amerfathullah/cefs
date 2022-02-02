@@ -8,13 +8,13 @@ import './cart.dart';
 class OrderItem {
   final String id;
   final double amount;
-  final List<CartItem> products;
+  final List<CartItem> checklists;
   final DateTime dateTime;
 
   OrderItem({
     @required this.id,
     @required this.amount,
-    @required this.products,
+    @required this.checklists,
     @required this.dateTime,
   });
 }
@@ -43,7 +43,7 @@ class Orders with ChangeNotifier {
       loadedOrders.add(OrderItem(
           id: orderId,
           amount: orderData['amount'],
-          products: (orderData['products'] as List<dynamic>)
+          checklists: (orderData['checklists'] as List<dynamic>)
               .map((item) => CartItem(
                     id: item['id'],
                     title: item['title'],
@@ -59,7 +59,7 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addOrder(List<CartItem> cartProducts, double total) async {
+  Future<void> addOrder(List<CartItem> cartChecklists, double total) async {
     final url = Uri.parse(
         'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/orders/$userId.json?auth=$authToken');
     final timestamp = DateTime.now();
@@ -69,7 +69,7 @@ class Orders with ChangeNotifier {
         {
           'amount': total,
           'dateTime': timestamp.toIso8601String(),
-          'products': cartProducts
+          'checklists': cartChecklists
               .map((cp) => {
                     'id': cp.id,
                     'title': cp.title,
@@ -85,7 +85,7 @@ class Orders with ChangeNotifier {
       OrderItem(
         id: json.decode(response.body)['name'],
         amount: total,
-        products: cartProducts,
+        checklists: cartChecklists,
         dateTime: timestamp,
       ),
     );

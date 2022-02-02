@@ -5,14 +5,14 @@ import '../providers/cart.dart';
 
 class CartItem extends StatelessWidget {
   final String id;
-  final String productId;
+  final String checklistId;
   final double price;
   final int quantity;
   final String title;
 
   CartItem(
     this.id,
-    this.productId,
+    this.checklistId,
     this.price,
     this.quantity,
     this.title,
@@ -61,7 +61,7 @@ class CartItem extends StatelessWidget {
         );
       },
       onDismissed: (direction) {
-        Provider.of<Cart>(context, listen: false).removeItem(productId);
+        Provider.of<Cart>(context, listen: false).removeItem(checklistId);
       },
       child: Card(
         margin: EdgeInsets.symmetric(

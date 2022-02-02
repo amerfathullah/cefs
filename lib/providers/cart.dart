@@ -33,11 +33,11 @@ class Cart with ChangeNotifier {
     return total;
   }
 
-  void addItem(String productId, double price, String title) {
-    if (_items.containsKey(productId)) {
+  void addItem(String checklistId, double price, String title) {
+    if (_items.containsKey(checklistId)) {
       // change quantity
       _items.update(
-        productId,
+        checklistId,
         (existingCartItem) => CartItem(
           id: existingCartItem.id,
           title: existingCartItem.title,
@@ -47,7 +47,7 @@ class Cart with ChangeNotifier {
       );
     } else {
       _items.putIfAbsent(
-        productId,
+        checklistId,
         () => CartItem(
           id: DateTime.now().toString(),
           title: title,
@@ -59,8 +59,8 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItem(String productId) {
-    _items.remove(productId);
+  void removeItem(String checklistId) {
+    _items.remove(checklistId);
     notifyListeners();
   }
 
@@ -69,20 +69,20 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeSingleItem(String productId) {
-    if (!_items.containsKey(productId)) {
+  void removeSingleItem(String checklistId) {
+    if (!_items.containsKey(checklistId)) {
       return;
     }
-    if (_items[productId].quantity > 1) {
+    if (_items[checklistId].quantity > 1) {
       _items.update(
-          productId,
+          checklistId,
           (existingCartItem) => CartItem(
               id: existingCartItem.id,
               title: existingCartItem.title,
               quantity: existingCartItem.quantity - 1,
               price: existingCartItem.price));
     } else {
-      _items.remove(productId);
+      _items.remove(checklistId);
     }
     notifyListeners();
   }

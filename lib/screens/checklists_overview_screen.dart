@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/products.dart';
+import '../providers/checklists.dart';
 import '../widgets/app_drawer.dart';
 import '../screens/cart_screen.dart';
 import '../providers/cart.dart';
 import '../widgets/badge.dart';
-import '../widgets/products_grid.dart';
+import '../widgets/checklists_grid.dart';
 
 enum FilterOptions {
   Favorites,
   All,
 }
 
-class ProductsOverviewScreen extends StatefulWidget {
+class ChecklistsOverviewScreen extends StatefulWidget {
   @override
-  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
+  State<ChecklistsOverviewScreen> createState() =>
+      _ChecklistsOverviewScreenState();
 }
 
-class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+class _ChecklistsOverviewScreenState extends State<ChecklistsOverviewScreen> {
   var _showOnlyFavorites = false;
   var _isInit = true;
   var _isLoading = false;
 
   @override
   void initState() {
-    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
+    // Provider.of<Checklists>(context).fetchAndSetChecklists(); // WON'T WORK!
     // Future.delayed(Duration.zero).then((_) {
-    //   Provider.of<Products>(context).fetchAndSetProducts();
+    //   Provider.of<Checklists>(context).fetchAndSetChecklists();
     // });
     super.initState();
   }
@@ -38,7 +39,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
+      Provider.of<Checklists>(context).fetchAndSetChecklists().then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -98,7 +99,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ProductsGrid(_showOnlyFavorites),
+          : ChecklistsGrid(_showOnlyFavorites),
     );
   }
 }

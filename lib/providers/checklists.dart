@@ -4,29 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/http_exception.dart';
-import './product.dart';
+import 'checklist.dart';
 
-class Products with ChangeNotifier {
-  List<Product> _items = [];
+class Checklists with ChangeNotifier {
+  List<Checklist> _items = [];
 
   // var _showFavoritesOnly = false;
   final String authToken;
   final String userId;
 
-  Products(this.authToken, this.userId, this._items);
+  Checklists(this.authToken, this.userId, this._items);
 
-  List<Product> get items {
+  List<Checklist> get items {
     // if (_showFavoritesOnly) {
     //   return _items.where((prodItem) => prodItem.isFavorite).toList();
     // }
     return [..._items];
   }
 
-  List<Product> get favoriteItems {
+  List<Checklist> get favoriteItems {
     return _items.where((prodItem) => prodItem.isFavorite).toList();
   }
 
-  Product findById(String id) {
+  Checklist findById(String id) {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
@@ -40,11 +40,11 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+  Future<void> fetchAndSetChecklists([bool filterByUser = false]) async {
     final filterString =
         filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     final url = Uri.parse(
-        'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken&$filterString');
+        'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/checklists.json?auth=$authToken&$filterString');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -54,10 +54,10 @@ class Products with ChangeNotifier {
       final favoriteResponse = await http.get(Uri.parse(
           'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/userFavorites/$userId.json?auth=$authToken'));
       final favoriteData = json.decode(favoriteResponse.body);
-      final List<Product> loadedProducts = [];
+      final List<Checklist> loadedChecklists = [];
       extractedData.forEach((prodId, prodData) {
-        loadedProducts.add(
-          Product(
+        loadedChecklists.add(
+          Checklist(
             id: prodId,
             title: prodData['title'],
             description: prodData['description'],
@@ -68,37 +68,37 @@ class Products with ChangeNotifier {
           ),
         );
       });
-      _items = loadedProducts;
+      _items = loadedChecklists;
       notifyListeners();
     } catch (error) {
       throw (error);
     }
   }
 
-  Future<void> addProduct(Product product) async {
+  Future<void> addChecklist(Checklist checklist) async {
     final url = Uri.parse(
-        'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/products.json?auth=$authToken');
+        'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/checklists.json?auth=$authToken');
     try {
       final response = await http.post(
         url,
         body: json.encode(
           {
-            'title': product.title,
-            'description': product.description,
-            'imageUrl': product.imageUrl,
-            'price': product.price,
+            'title': checklist.title,
+            'description': checklist.description,
+            'imageUrl': checklist.imageUrl,
+            'price': checklist.price,
             'creatorId': userId,
           },
         ),
       );
-      final newProduct = Product(
+      final newChecklist = Checklist(
           id: json.decode(response.body)['name'],
-          title: product.title,
-          description: product.description,
-          price: product.price,
-          imageUrl: product.imageUrl);
-      _items.add(newProduct);
-      // _items.insert(0, newProduct); // at the start of the list
+          title: checklist.title,
+          description: checklist.description,
+          price: checklist.price,
+          imageUrl: checklist.imageUrl);
+      _items.add(newChecklist);
+      // _items.insert(0, newChecklist); // at the start of the list
       notifyListeners();
     } catch (error) {
       print(error);
@@ -106,38 +106,38 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> updateProduct(String id, Product newProduct) async {
+  Future<void> updateChecklist(String id, Checklist newChecklist) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
       final url = Uri.parse(
-          'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json?auth=$authToken');
+          'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/checklists/$id.json?auth=$authToken');
       await http.patch(url,
           body: json.encode({
-            'title': newProduct.title,
-            'description': newProduct.description,
-            'imageUrl': newProduct.imageUrl,
-            'price': newProduct.price,
+            'title': newChecklist.title,
+            'description': newChecklist.description,
+            'imageUrl': newChecklist.imageUrl,
+            'price': newChecklist.price,
           }));
-      _items[prodIndex] = newProduct;
+      _items[prodIndex] = newChecklist;
       notifyListeners();
     } else {
       print('...');
     }
   }
 
-  Future<void> deleteProduct(String id) async {
+  Future<void> deleteChecklist(String id) async {
     final url = Uri.parse(
-        'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/products/$id.json?auth=$authToken');
-    final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
-    var existingProduct = _items[existingProductIndex];
-    _items.removeAt(existingProductIndex);
+        'https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app/checklists/$id.json?auth=$authToken');
+    final existingChecklistIndex = _items.indexWhere((prod) => prod.id == id);
+    var existingChecklist = _items[existingChecklistIndex];
+    _items.removeAt(existingChecklistIndex);
     notifyListeners();
     final response = await http.delete(url);
     if (response.statusCode >= 400) {
-      _items.insert(existingProductIndex, existingProduct);
+      _items.insert(existingChecklistIndex, existingChecklist);
       notifyListeners();
-      throw HttpException('Could not delete product.');
+      throw HttpException('Could not delete checklist.');
     }
-    existingProduct = null;
+    existingChecklist = null;
   }
 }

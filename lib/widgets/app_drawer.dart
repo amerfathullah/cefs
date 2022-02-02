@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/user_products_screen.dart';
+import '../screens/edit_checklist_screen.dart';
+import '../screens/user_checklists_screen.dart';
 import '../providers/auth.dart';
 import '../screens/orders_screen.dart';
 
@@ -12,7 +13,7 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text('CEFS Response'),
+            title: Text('Equipment Checklist'),
             automaticallyImplyLeading: false,
           ),
           Divider(),
@@ -25,20 +26,20 @@ class AppDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.checklist),
-            title: Text('Equipment Checklist'),
+            leading: Icon(Icons.add),
+            title: Text('New Checklist'),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(OrdersScreen.routeName);
+                  .pushReplacementNamed(EditChecklistScreen.routeName);
             },
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.edit),
-            title: Text('Manage Products'),
+            leading: Icon(Icons.history),
+            title: Text('Previous Checklist'),
             onTap: () {
               Navigator.of(context)
-                  .pushReplacementNamed(UserProductsScreen.routeName);
+                  .pushReplacementNamed(UserChecklistsScreen.routeName);
             },
           ),
           Divider(),
@@ -49,7 +50,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pop();
               Navigator.of(context).pushReplacementNamed('/');
               // Navigator.of(context)
-              //     .pushReplacementNamed(UserProductsScreen.routeName);
+              //     .pushReplacementNamed(UserChecklistsScreen.routeName);
               Provider.of<Auth>(context, listen: false).logout();
             },
           ),

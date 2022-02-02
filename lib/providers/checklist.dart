@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-class Product with ChangeNotifier {
+class Checklist with ChangeNotifier {
   final String id;
   final String title;
   final String description;
@@ -11,7 +11,7 @@ class Product with ChangeNotifier {
   final String imageUrl;
   bool isFavorite;
 
-  Product({
+  Checklist({
     @required this.id,
     @required this.title,
     @required this.description,

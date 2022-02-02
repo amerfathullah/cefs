@@ -71,16 +71,16 @@
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
-				97C146EF1CF9000F007C117D /* Products */,
+				97C146EF1CF9000F007C117D /* Checklists */,
 			);
 			sourceTree = "<group>";
 		};
-		97C146EF1CF9000F007C117D /* Products */ = {
+		97C146EF1CF9000F007C117D /* Checklists */ = {
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
 			);
-			name = Products;
+			name = Checklists;
 			sourceTree = "<group>";
 		};
 		97C146F01CF9000F007C117D /* Runner */ = {
@@ -117,9 +117,9 @@
 			dependencies = (
 			);
 			name = Runner;
-			productName = Runner;
-			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
-			productType = "com.apple.product-type.application";
+			checklistName = Runner;
+			checklistReference = 97C146EE1CF9000F007C117D /* Runner.app */;
+			checklistType = "com.apple.checklist-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -145,7 +145,7 @@
 				Base,
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
-			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
+			checklistRefGroup = 97C146EF1CF9000F007C117D /* Checklists */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

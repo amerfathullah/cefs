@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/products.dart';
+import '../providers/checklists.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ChecklistDetailScreen extends StatelessWidget {
   // final String title;
   // final double price;
 
-  // ProductDetailScreen(this.title, this.price);
-  static const routeName = '/product-detail';
+  // ChecklistDetailScreen(this.title, this.price);
+  static const routeName = '/checklist-detail';
 
   @override
   Widget build(BuildContext context) {
-    final productId =
+    final checklistId =
         ModalRoute.of(context).settings.arguments as String; //is the id!
-    final loadedProduct =
-        Provider.of<Products>(context, listen: false).findById(productId);
+    final loadedChecklist =
+        Provider.of<Checklists>(context, listen: false).findById(checklistId);
     return Scaffold(
       appBar: AppBar(
-        title: Text(loadedProduct.title),
+        title: Text(loadedChecklist.title),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -27,13 +27,13 @@ class ProductDetailScreen extends StatelessWidget {
               height: 300,
               width: double.infinity,
               child: Image.network(
-                loadedProduct.imageUrl,
+                loadedChecklist.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
             SizedBox(height: 10),
             Text(
-              '\$${loadedProduct.price}',
+              '\$${loadedChecklist.price}',
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 20,
@@ -44,7 +44,7 @@ class ProductDetailScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
               child: Text(
-                loadedProduct.description,
+                loadedChecklist.description,
                 textAlign: TextAlign.center,
                 softWrap: true,
               ),

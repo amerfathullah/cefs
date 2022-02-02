@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/products.dart';
-import '../providers/product.dart';
+import '../widgets/app_drawer.dart';
+import '../providers/checklists.dart';
+import '../providers/checklist.dart';
 
-class EditProductScreen extends StatefulWidget {
-  static const routeName = '/edit-product';
+class EditChecklistScreen extends StatefulWidget {
+  static const routeName = '/edit-checklist';
   @override
-  _EditProductScreenState createState() => _EditProductScreenState();
+  _EditChecklistScreenState createState() => _EditChecklistScreenState();
 }
 
-class _EditProductScreenState extends State<EditProductScreen> {
+class _EditChecklistScreenState extends State<EditChecklistScreen> {
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();
   final _imageUrlFocusedNode = FocusNode();
   final _form = GlobalKey<FormState>();
-  var _editedProduct = Product(
+  var _editedChecklist = Checklist(
     id: null,
     title: '',
     description: '',
@@ -41,18 +42,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      final productId = ModalRoute.of(context).settings.arguments as String;
-      if (productId != null) {
-        _editedProduct =
-            Provider.of<Products>(context, listen: false).findById(productId);
+      final checklistId = ModalRoute.of(context).settings.arguments as String;
+      if (checklistId != null) {
+        _editedChecklist = Provider.of<Checklists>(context, listen: false)
+            .findById(checklistId);
         _initValues = {
-          'title': _editedProduct.title,
-          'price': _editedProduct.price.toString(),
-          'description': _editedProduct.description,
-          // 'imageUrl': _editedProduct.imageUrl,
+          'title': _editedChecklist.title,
+          'price': _editedChecklist.price.toString(),
+          'description': _editedChecklist.description,
+          // 'imageUrl': _editedChecklist.imageUrl,
           'imageUrl': '',
         };
-        _imageUrlController.text = _editedProduct.imageUrl;
+        _imageUrlController.text = _editedChecklist.imageUrl;
       }
     }
     _isInit = false;
@@ -91,13 +92,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
     setState(() {
       _isLoading = true;
     });
-    if (_editedProduct.id != null) {
-      await Provider.of<Products>(context, listen: false)
-          .updateProduct(_editedProduct.id, _editedProduct);
+    if (_editedChecklist.id != null) {
+      await Provider.of<Checklists>(context, listen: false)
+          .updateChecklist(_editedChecklist.id, _editedChecklist);
     } else {
       try {
-        await Provider.of<Products>(context, listen: false)
-            .addProduct(_editedProduct);
+        await Provider.of<Checklists>(context, listen: false)
+            .addChecklist(_editedChecklist);
       } catch (e) {
         await showDialog<Null>(
           context: context,
@@ -132,7 +133,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Product'),
+        title: Text('Edit Checklist'),
         actions: [
           IconButton(
             onPressed: _saveForm,
@@ -140,6 +141,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           ),
         ],
       ),
+      drawer: AppDrawer(),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(),
@@ -165,13 +167,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           return null;
                         },
                         onSaved: (value) {
-                          _editedProduct = Product(
+                          _editedChecklist = Checklist(
                             title: value,
-                            price: _editedProduct.price,
-                            description: _editedProduct.description,
-                            imageUrl: _editedProduct.imageUrl,
-                            id: _editedProduct.id,
-                            isFavorite: _editedProduct.isFavorite,
+                            price: _editedChecklist.price,
+                            description: _editedChecklist.description,
+                            imageUrl: _editedChecklist.imageUrl,
+                            id: _editedChecklist.id,
+                            isFavorite: _editedChecklist.isFavorite,
                           );
                         },
                       ),
@@ -198,13 +200,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           return null;
                         },
                         onSaved: (value) {
-                          _editedProduct = Product(
-                            title: _editedProduct.title,
+                          _editedChecklist = Checklist(
+                            title: _editedChecklist.title,
                             price: double.parse(value),
-                            description: _editedProduct.description,
-                            imageUrl: _editedProduct.imageUrl,
-                            id: _editedProduct.id,
-                            isFavorite: _editedProduct.isFavorite,
+                            description: _editedChecklist.description,
+                            imageUrl: _editedChecklist.imageUrl,
+                            id: _editedChecklist.id,
+                            isFavorite: _editedChecklist.isFavorite,
                           );
                         },
                       ),
@@ -224,13 +226,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           return null;
                         },
                         onSaved: (value) {
-                          _editedProduct = Product(
-                            title: _editedProduct.title,
-                            price: _editedProduct.price,
+                          _editedChecklist = Checklist(
+                            title: _editedChecklist.title,
+                            price: _editedChecklist.price,
                             description: value,
-                            imageUrl: _editedProduct.imageUrl,
-                            id: _editedProduct.id,
-                            isFavorite: _editedProduct.isFavorite,
+                            imageUrl: _editedChecklist.imageUrl,
+                            id: _editedChecklist.id,
+                            isFavorite: _editedChecklist.isFavorite,
                           );
                         },
                       ),
@@ -289,13 +291,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 setState(() {});
                               },
                               onSaved: (value) {
-                                _editedProduct = Product(
-                                  title: _editedProduct.title,
-                                  price: _editedProduct.price,
-                                  description: _editedProduct.description,
+                                _editedChecklist = Checklist(
+                                  title: _editedChecklist.title,
+                                  price: _editedChecklist.price,
+                                  description: _editedChecklist.description,
                                   imageUrl: value,
-                                  id: _editedProduct.id,
-                                  isFavorite: _editedProduct.isFavorite,
+                                  id: _editedChecklist.id,
+                                  isFavorite: _editedChecklist.isFavorite,
                                 );
                               },
                             ),

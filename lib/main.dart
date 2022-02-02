@@ -6,15 +6,16 @@ import './screens/dashboard_screen.dart';
 import './screens/splash_screen.dart';
 import './providers/auth.dart';
 import './screens/auth_screen.dart';
-import './screens/edit_product_screen.dart';
-import './screens/user_products_screen.dart';
+import './screens/edit_checklist_screen.dart';
+import './screens/user_checklists_screen.dart';
 import './providers/orders.dart';
 import './screens/cart_screen.dart';
 import './providers/cart.dart';
-import './screens/product_detail_screen.dart';
-import './screens/products_overview_screen.dart';
-import './providers/products.dart';
+import './screens/checklist_detail_screen.dart';
+import './screens/checklists_overview_screen.dart';
+import 'providers/checklists.dart';
 import './screens/orders_screen.dart';
+import 'screens/edit_checklist_screen.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -29,11 +30,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
         ),
-        ChangeNotifierProxyProvider<Auth, Products>(
-          update: (ctx, auth, previousProducts) => Products(
+        ChangeNotifierProxyProvider<Auth, Checklists>(
+          update: (ctx, auth, previousChecklists) => Checklists(
               auth.token,
               auth.userId,
-              previousProducts == null ? [] : previousProducts.items),
+              previousChecklists == null ? [] : previousChecklists.items),
         ),
         ChangeNotifierProvider(
           create: (ctx) => Cart(),
@@ -62,11 +63,12 @@ class MyApp extends StatelessWidget {
                           : AuthScreen(),
                 ),
           routes: {
-            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+            ChecklistDetailScreen.routeName: (ctx) => ChecklistDetailScreen(),
             CartScreen.routeName: (ctx) => CartScreen(),
             OrdersScreen.routeName: (ctx) => OrdersScreen(),
-            UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
-            EditProductScreen.routeName: (ctx) => EditProductScreen(),
+            UserChecklistsScreen.routeName: (ctx) => UserChecklistsScreen(),
+            EditChecklistScreen.routeName: (ctx) => EditChecklistScreen(),
+            // EditChecklist.routeName: (ctx) => EditChecklist(),
           },
         ),
       ),

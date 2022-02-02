@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/edit_product_screen.dart';
+import '../screens/edit_checklist_screen.dart';
 import '../widgets/app_drawer.dart';
-import '../widgets/user_product_item.dart';
-import '../providers/products.dart';
+import '../widgets/user_checklist_item.dart';
+import '../providers/checklists.dart';
 
-class UserProductsScreen extends StatelessWidget {
-  static const routeName = '/user-products';
+class UserChecklistsScreen extends StatelessWidget {
+  static const routeName = '/user-checklists';
 
-  Future<void> _refreshProducts(BuildContext context) async {
-    await Provider.of<Products>(context, listen: false)
-        .fetchAndSetProducts(true);
+  Future<void> _refreshChecklists(BuildContext context) async {
+    await Provider.of<Checklists>(context, listen: false)
+        .fetchAndSetChecklists(true);
   }
 
   @override
   Widget build(BuildContext context) {
-    // final productsData = Provider.of<Products>(context);
+    // final checklistsData = Provider.of<Checklists>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Products'),
+        title: const Text('Your Checklists'),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(EditProductScreen.routeName);
+              Navigator.of(context).pushNamed(EditChecklistScreen.routeName);
             },
             icon: const Icon(Icons.add),
           ),
@@ -31,25 +31,25 @@ class UserProductsScreen extends StatelessWidget {
       ),
       drawer: AppDrawer(),
       body: FutureBuilder(
-        future: _refreshProducts(context),
+        future: _refreshChecklists(context),
         builder: (ctx, snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : RefreshIndicator(
-                    onRefresh: () => _refreshProducts(context),
-                    child: Consumer<Products>(
-                      builder: (ctx, productsData, _) => Padding(
+                    onRefresh: () => _refreshChecklists(context),
+                    child: Consumer<Checklists>(
+                      builder: (ctx, checklistsData, _) => Padding(
                         padding: EdgeInsets.all(8),
                         child: ListView.builder(
-                          itemCount: productsData.items.length,
+                          itemCount: checklistsData.items.length,
                           itemBuilder: (_, i) => Column(
                             children: [
-                              UserProductItem(
-                                productsData.items[i].id,
-                                productsData.items[i].title,
-                                productsData.items[i].imageUrl,
+                              UserChecklistItem(
+                                checklistsData.items[i].id,
+                                checklistsData.items[i].title,
+                                checklistsData.items[i].imageUrl,
                               ),
                               Divider(),
                             ],
