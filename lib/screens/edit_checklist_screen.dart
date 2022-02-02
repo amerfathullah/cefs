@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../widgets/app_drawer.dart';
 import '../providers/checklists.dart';
 import '../providers/checklist.dart';
+import 'user_checklists_screen.dart';
 
 class EditChecklistScreen extends StatefulWidget {
   static const routeName = '/edit-checklist';
@@ -125,7 +126,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
     setState(() {
       _isLoading = false;
     });
-    Navigator.of(context).pop();
+    Navigator.of(context).pushReplacementNamed(UserChecklistsScreen.routeName);
     // Navigator.of(context).pop();
   }
 
