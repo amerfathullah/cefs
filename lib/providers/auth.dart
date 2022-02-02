@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../models/http_exception.dart';
 
@@ -12,6 +13,8 @@ class Auth with ChangeNotifier {
   DateTime _expiryDate;
   String _userId;
   Timer _authTimer;
+
+  final authKey = dotenv.env['AUTH_KEY'];
 
   bool get isAuth {
     return token != null;
@@ -33,7 +36,7 @@ class Auth with ChangeNotifier {
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
     final url = Uri.parse(
-        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyA3iYdPXYjT4tZ9UTQWz6pOyGwF5a6vZ3o');
+        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=$authKey');
     try {
       final response = await http.post(url,
           body: json.encode({
