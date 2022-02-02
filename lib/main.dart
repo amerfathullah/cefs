@@ -44,10 +44,10 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
-          title: 'MyShop',
+          title: 'CEFS',
           theme: ThemeData(
-            primarySwatch: Colors.purple,
-            accentColor: Colors.deepOrange,
+            primarySwatch: Colors.deepOrange,
+            accentColor: Colors.redAccent,
             fontFamily: 'Lato',
           ),
           home: auth.isAuth
