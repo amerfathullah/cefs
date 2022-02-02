@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import './screens/dashboard_screen.dart';
 import './screens/splash_screen.dart';
 import './providers/auth.dart';
 import './screens/auth_screen.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Lato',
           ),
           home: auth.isAuth
-              ? ProductsOverviewScreen()
+              ? DashboardScreen()
               : FutureBuilder(
                   future: auth.tryAutologin(),
                   builder: (ctx, authResultSnapshot) =>
