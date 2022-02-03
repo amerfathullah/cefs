@@ -11,7 +11,7 @@ class UserChecklistsScreen extends StatelessWidget {
 
   Future<void> _refreshChecklists(BuildContext context) async {
     await Provider.of<Checklists>(context, listen: false)
-        .fetchAndSetChecklists(true);
+        .fetchAndSetChecklists(false);
   }
 
   @override
@@ -48,8 +48,9 @@ class UserChecklistsScreen extends StatelessWidget {
                             children: [
                               UserChecklistItem(
                                 checklistsData.items[i].id,
-                                checklistsData.items[i].title,
-                                checklistsData.items[i].imageUrl,
+                                checklistsData.items[i].foamTender,
+                                // '',
+                                // checklistsData.items[i].imageUrl,
                               ),
                               Divider(),
                             ],

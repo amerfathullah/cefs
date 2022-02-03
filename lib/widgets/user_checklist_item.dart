@@ -7,17 +7,21 @@ import '../screens/edit_checklist_screen.dart';
 class UserChecklistItem extends StatelessWidget {
   final String id;
   final String title;
-  final String imageUrl;
+  // final String imageUrl;
 
-  UserChecklistItem(this.id, this.title, this.imageUrl);
+  UserChecklistItem(
+    this.id,
+    this.title,
+    // this.imageUrl
+  );
   @override
   Widget build(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
     return ListTile(
       title: Text(title),
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(imageUrl),
-      ),
+      // leading: CircleAvatar(
+      //   backgroundImage: NetworkImage(imageUrl),
+      // ),
       trailing: Container(
         width: 100,
         child: Row(
