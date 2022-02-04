@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/checklist_preview_screen.dart';
 import '../providers/checklists.dart';
 import '../screens/edit_checklist_screen.dart';
 
@@ -18,6 +19,10 @@ class UserChecklistItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
     return ListTile(
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(ChecklistPreviewScreen.routeName, arguments: id);
+      },
       title: Text(title),
       // leading: CircleAvatar(
       //   backgroundImage: NetworkImage(imageUrl),

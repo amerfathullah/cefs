@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "370255806849",
+    "firebase_url": "https://cefs-5580c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cefs-5580c",
+    "storage_bucket": "cefs-5580c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370255806849:android:2f5a9cace4f4087b4e6880",
+        "android_client_info": {
+          "package_name": "com.petronas.cefs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370255806849-ffcm73e0fha22q3gjl82pcsun75rcq3h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petronas.cefs",
+            "certificate_hash": "1c6279e69350a40badcd68610615b67c2682cc99"
+          }
+        },
+        {
+          "client_id": "370255806849-gtptn6ulm83l87j08hr58uajb9h5mig7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3BzIBfjm2F5Gxv2M24HJd19I8hWE-Gbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370255806849-gtptn6ulm83l87j08hr58uajb9h5mig7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

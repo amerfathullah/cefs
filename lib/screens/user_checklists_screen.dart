@@ -19,7 +19,7 @@ class UserChecklistsScreen extends StatelessWidget {
     // final checklistsData = Provider.of<Checklists>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Checklists'),
+        title: const Text('All Checklists'),
         actions: [
           IconButton(
             onPressed: () {

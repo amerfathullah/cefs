@@ -226,7 +226,8 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                     children: [
                       TextFormField(
                         initialValue: _initValues['foamTender'],
-                        decoration: InputDecoration(labelText: 'Foam Tender'),
+                        decoration:
+                            InputDecoration(labelText: 'Foam Tender (FT)'),
                         textInputAction: TextInputAction.next,
                         // onFieldSubmitted: (_) {
                         //   FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -315,6 +316,16 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3, color: Colors.black),
+                      Row(
+                        children: [
+                          Text(
+                            'TIME: 0800-2000 SHIFT:',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
                       Row(
                         children: [
                           Radio<ShiftDay>(
@@ -365,6 +376,14 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       Row(
                         children: [
+                          Text(
+                            'TIME: 2000-0800 SHIFT:',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
                           Radio<ShiftNight>(
                             // title: const Text('A'),
                             value: ShiftNight.A,
@@ -411,6 +430,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           Text('D'),
                         ],
                       ),
+                      Divider(thickness: 3, color: Colors.black),
                       TextFormField(
                         initialValue: _initValues['foamCapacity'],
                         decoration: InputDecoration(labelText: 'Foam Capacity'),
@@ -520,9 +540,40 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3, color: Colors.black),
+                      Row(
+                        children: [
+                          Text(
+                            'LIST OF EQUIPMENT',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Text(
+                            'CABINET 1',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Text('CO2 FIRE EXTINGUISHER'),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['c1e1day'],
-                        decoration: InputDecoration(labelText: 'C1E1DAY'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -576,7 +627,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['c1e1night'],
-                        decoration: InputDecoration(labelText: 'C1E1NIGHT'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -628,9 +679,16 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3),
+                      Row(
+                        children: [
+                          Text('D/P EXTINGUISHER (PORTABLE)'),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['c1e2day'],
-                        decoration: InputDecoration(labelText: 'C1E2DAY'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -684,7 +742,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['c1e2night'],
-                        decoration: InputDecoration(labelText: 'C1E2NIGHT'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -736,9 +794,16 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3),
+                      Row(
+                        children: [
+                          Text('WATER CURTAIN'),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['c1e3day'],
-                        decoration: InputDecoration(labelText: 'C1E3DAY'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -792,7 +857,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['c1e3night'],
-                        decoration: InputDecoration(labelText: 'C1E3NIGHT'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -844,9 +909,16 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3),
+                      Row(
+                        children: [
+                          Text('BLITZ FIRE MONITOR'),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['c1e4day'],
-                        decoration: InputDecoration(labelText: 'C1E4DAY'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -900,7 +972,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['c1e4night'],
-                        decoration: InputDecoration(labelText: 'C1E4NIGHT'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -952,9 +1024,29 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text(
+                            'CABINET 2',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Text('ADAPTOR 5” SURE LOCK TO 4” SCREW'),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['c2e1day'],
-                        decoration: InputDecoration(labelText: 'C2E1DAY'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -1008,7 +1100,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['c2e1night'],
-                        decoration: InputDecoration(labelText: 'C2E1NIGHT'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -1060,9 +1152,16 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3),
+                      Row(
+                        children: [
+                          Text('ADAPTOR FEMALE SCREW MALE SCREW'),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['c2e2day'],
-                        decoration: InputDecoration(labelText: 'C2E2DAY'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -1116,7 +1215,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['c2e2night'],
-                        decoration: InputDecoration(labelText: 'C2E2NIGHT'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
                         // focusNode: _priceFocusNode,
@@ -1168,10 +1267,22 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3, color: Colors.black),
+                      Row(
+                        children: [
+                          Text(
+                            'INSPECT BY',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['inspectNameDay'],
-                        decoration:
-                            InputDecoration(labelText: 'InspectNameDay'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         // onFieldSubmitted: (_) {
                         //   FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -1216,8 +1327,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['inspectNameNight'],
-                        decoration:
-                            InputDecoration(labelText: 'InspectNameNight'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         // onFieldSubmitted: (_) {
                         //   FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -1260,9 +1370,22 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: 10),
+                      Divider(thickness: 3, color: Colors.black),
+                      Row(
+                        children: [
+                          Text(
+                            'WATCH COMMANDER',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                       TextFormField(
                         initialValue: _initValues['watchNameDay'],
-                        decoration: InputDecoration(labelText: 'WatchNameDay'),
+                        decoration: InputDecoration(labelText: '0800-2000'),
                         textInputAction: TextInputAction.next,
                         // onFieldSubmitted: (_) {
                         //   FocusScope.of(context).requestFocus(_priceFocusNode);
@@ -1307,8 +1430,7 @@ class _EditChecklistScreenState extends State<EditChecklistScreen> {
                       ),
                       TextFormField(
                         initialValue: _initValues['watchNameNight'],
-                        decoration:
-                            InputDecoration(labelText: 'WatchNameNight'),
+                        decoration: InputDecoration(labelText: '2000-0800'),
                         textInputAction: TextInputAction.next,
                         // onFieldSubmitted: (_) {
                         //   FocusScope.of(context).requestFocus(_priceFocusNode);
