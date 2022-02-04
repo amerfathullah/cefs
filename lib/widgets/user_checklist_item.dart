@@ -7,13 +7,13 @@ import '../screens/edit_checklist_screen.dart';
 
 class UserChecklistItem extends StatelessWidget {
   final String id;
-  final String title;
-  // final String imageUrl;
+  final String foamTender;
+  final String regNo;
 
   UserChecklistItem(
     this.id,
-    this.title,
-    // this.imageUrl
+    this.foamTender,
+    this.regNo,
   );
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,9 @@ class UserChecklistItem extends StatelessWidget {
         Navigator.of(context)
             .pushNamed(ChecklistPreviewScreen.routeName, arguments: id);
       },
-      title: Text(title),
-      // leading: CircleAvatar(
-      //   backgroundImage: NetworkImage(imageUrl),
-      // ),
+      title: Text(foamTender),
+      subtitle: Text(regNo),
+      leading: Icon(Icons.picture_as_pdf),
       trailing: Container(
         width: 100,
         child: Row(

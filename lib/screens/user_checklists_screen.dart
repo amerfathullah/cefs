@@ -49,8 +49,7 @@ class UserChecklistsScreen extends StatelessWidget {
                               UserChecklistItem(
                                 checklistsData.items[i].id,
                                 checklistsData.items[i].foamTender,
-                                // '',
-                                // checklistsData.items[i].imageUrl,
+                                checklistsData.items[i].regNo,
                               ),
                               Divider(),
                             ],
